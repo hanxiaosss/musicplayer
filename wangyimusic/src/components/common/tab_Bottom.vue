@@ -1,9 +1,9 @@
 <template>
   <div class="tab_bottom">
       <ul>
-          <li><i class="icon iconfont icon-faxian"></i>发现</li>
+          <li><a class="active" href="/"><i class="icon iconfont icon-faxian"></i>发现</a></li>
           <li><i class="icon iconfont icon-shipin"></i>视频</li>
-          <li><i class="icon iconfont icon-yinle"></i>我的</li>
+          <li><a href="/mine"><i class="icon iconfont icon-yinle"></i>我的</a></li>
           <li><i class="icon iconfont icon-haoyou"></i>朋友</li>
           <li><i class="icon iconfont icon-1zhanghu"></i>账号</li>
       </ul>
@@ -54,6 +54,9 @@
     font-size: 24px;
     text-align: center;
     margin-bottom: 3px;
+}
+.active{
+    color:#DB4137;
 }
 
 </style>

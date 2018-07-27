@@ -77,6 +77,9 @@
 } 
 </script>
 <style>
+.mint-swipe-item{
+  border-radius: 5px;
+}
 .discover{
   margin-bottom: 55px;
 }
