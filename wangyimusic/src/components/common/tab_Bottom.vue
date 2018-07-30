@@ -1,11 +1,11 @@
 <template>
   <div class="tab_bottom">
       <ul>
-          <li><a class="active" href="/"><i class="icon iconfont icon-faxian"></i>发现</a></li>
-          <li><i class="icon iconfont icon-shipin"></i>视频</li>
-          <li><a href="/mine"><i class="icon iconfont icon-yinle"></i>我的</a></li>
-          <li><i class="icon iconfont icon-haoyou"></i>朋友</li>
-          <li><i class="icon iconfont icon-1zhanghu"></i>账号</li>
+          <li><router-link to="/discover?index=0"><i class="icon iconfont icon-faxian"></i>发现</router-link></li>
+          <li><router-link to="/svideo?index=1"><i class="icon iconfont icon-shipin"></i>视频</router-link></li>
+          <li><router-link to="/mine?index=2"><i class="icon iconfont icon-yinle"></i>我的</router-link></a></li>
+          <li><router-link to="/friends?index=3"><i class="icon iconfont icon-haoyou"></i>朋友</router-link></li>
+          <li><router-link to="/account?index=4"><i class="icon iconfont icon-1zhanghu"></i>账号</router-link></li>
       </ul>
   </div>
 </template>
@@ -16,6 +16,8 @@
           return {}
   }
 }
+
+
 </script>
 
 <style>
@@ -55,8 +57,9 @@
     text-align: center;
     margin-bottom: 3px;
 }
-.active{
-    color:#DB4137;
+
+.router-link-active{
+  color:#DB4137;
 }
 
 </style>

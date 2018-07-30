@@ -1,14 +1,23 @@
 <template>
   <div class="search_box">
-      <i class="icon iconfont icon-maikefeng"></i>
-      <div class="input_box"><i class="icon iconfont icon-search"></i><input type="text" placeholder="陈慧娴最近很火哦"></div>
+      <i class="icon iconfont" v-bind:class="left_icon"></i>
+      <div class="input_box"><i class="icon iconfont" v-bind:class="right_icon"></i><input type="text" placeholder="陈慧娴最近很火哦"></div>
+      <i class="icon iconfont icon-16"></i>
   </div>
 </template>
 <script>
+var index = window.location.href.split('=')[1]
+var classArr=[{left:'icon-maikefeng',right:'icon-search'},{left:'icon-video',right:'icon-search'}]
 export default {
       name: 'SearchBox',
       data () {
-          return {}
+          return {
+            'left_icon':classArr[index].left,
+            'right_icon':classArr[index].right
+          }
+  },
+  beforeCreate:function(){
+    
   }
 } 
 </script>
@@ -21,11 +30,13 @@ export default {
   width: 95%;
   background: #DB4137;
   padding: 10px;
+  display: flex;
+  justify-content: space-between;
 }
 .search_box i{
   font-size: 22px;
   color:#fff;
-  margin-right: 5px;
+  margin-right: 0 5px;
 }
 
 .input_box{
