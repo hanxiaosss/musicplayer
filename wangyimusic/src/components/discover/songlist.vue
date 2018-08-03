@@ -2,7 +2,7 @@
   <div class="songlist_content">
     <div class="header">
       <div class="back"><img src="../../assets/resource/back.png" alt=""></div>
-      <div class="title">歌单</div>
+      <div class="title1">歌单</div>
       <div><i class="icon iconfont icon-gengduo"></i><i class="icon iconfont icon-iconset0142"></i></div>
     </div>
     <div class="info_cover">
@@ -97,12 +97,34 @@
   </div>
 </template>
 <script>
-    var id = window.location.href.split('=')[1]
+    import entities from '../../untils/entities'
+    import { Swipe, SwipeItem } from 'mint-ui'
+    import Vue from 'vue'
+    import VueResource from 'vue-resource'
+    var id = window.location.href.split('=')[1];
+    console.log(id);
     export default {
       name: 'songlist',
       data () {
           return {
           }
+      },
+      mounted(){
+        this.getListById(id);
+      },
+      methods:{
+        getListById(id){
+          console.log(entities.api+'/songlist/1');
+            this.$http.get(entities.api+'/songlist/',{'id':id}).then(res =>{
+              console.log(res);
+            let data = res.data.data;
+            if(res.ok){
+            this.newestMusic=data;
+             }
+        }).catch((error)=>{
+            console.log(error);
+        })
+      }
       }
    }
 </script>
@@ -149,19 +171,26 @@
   background: #7BA7B4;
 }
 .header{
+  z-index: 10000;
+  position: fixed;
+  width: 95%;
+  left: 0;
+  top: 0;
   display: flex;
   justify-content: space-between;
   color:#fff;
   padding: 10px;
+  background: #7BA7B4;
   /* line-height: 22px; */
 }
 
-.title{
+.title1{
   line-height: 22px;
 }
 
 .info_cover{
   background:#7BA7B4; 
+  padding-top:45px;
 }
 .input_box1{
   margin: 10px;

@@ -20,7 +20,7 @@
         <div class="recommad">
           <div class="title">推荐歌单<i class="icon iconfont icon-jiantou"></i></div>
           <ul class="cover_list">
-            <li v-for="list in musicLists"><router-link to="/discover/songlist?id=list.id"><img :src="list.listPicture" class="list_cover"><div class="discription">{{list.listname}}</div></router-link></li>
+            <li v-for="list in musicLists"><router-link :to="{path:'/discover/songlist/',query:{id:list.id}}"><img :src="list.listPicture" class="list_cover"><div class="discription">{{list.listname}}</div></router-link></li>
           </ul>
         </div>
         <div class="newlist">
