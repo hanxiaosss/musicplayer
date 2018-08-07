@@ -110,7 +110,7 @@
       }
 }
 </script>
-<style>
+<style lang="css" ref="stylesheet/css" scoped>
 .mint-swipe-item{
   border-radius: 5px;
 }

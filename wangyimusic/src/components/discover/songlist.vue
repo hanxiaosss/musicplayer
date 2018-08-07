@@ -7,11 +7,11 @@
     </div>
     <div class="info_cover">
       <div class="input_box1"><i class="icon iconfont icon-search">搜索歌单内歌曲</i></div>
-      <div class="info"><div class="list_cover"><i class="icon iconfont icon-xihuan listened">100万</i><i class="icon iconfont icon-iconset0142 about"></i></div><div><div class="songlist_title">2018年7月最热新歌Top50</div><div class="editor"><img src="../../assets/resource/logo.jpg">网易云音乐<i class="icon iconfont icon-jiantou"></i></div></div></div>
+      <div class="info"><div class="list_cover1" :style="{backgroundImage: 'url(' + songlist.listPicture + ')'}"><i class="icon iconfont icon-xihuan listened">100万</i><i class="icon iconfont icon-iconset0142 about"></i></div><div class="info_right"><div class="songlist_title">{{songlist.listname}}</div><div class="editor"><img src="../../assets/resource/logo.jpg">网易云音乐<i class="icon iconfont icon-jiantou"></i></div></div></div>
       <div class="option_list">
         <ul>
-          <li><i class="icon iconfont icon-pinglun"></i><div>61</div></li>
-          <li><i class="icon iconfont icon-icon--"></i><div>72</div></li>
+          <li><i class="icon iconfont icon-pinglun"></i><div>{{songlist.playCount}}</div></li>
+          <li><i class="icon iconfont icon-icon--"></i><div>{{songlist.collectionTimes}}</div></li>
           <li><i class="icon iconfont icon-icondownload"></i><div>下载</div></li>
           <li><i class="icon iconfont icon-bianji"></i><div>多选</div></li>
         </ul>
@@ -21,77 +21,27 @@
       <div class="play_info">
         <i class="icon iconfont icon-16"></i>
         <div class="play_data">
-          <div class="play_all">播放全部<span class="all_number">(共39首)</span></div>
-          <div class="collect">+收藏(7482)</div>
+          <div class="play_all">播放全部<span class="all_number">(共{{songlist.songs.length}}首)</span></div>
+          <div class="collect">+收藏({{songlist.collectionTimes}})</div>
         </div>
       </div>
       <ul class="songs">
-        <li>
-          <div class="rank">1</div>
+        <li v-for="(item,index) of songlist.songs">
+          <div class="rank">{{index+1}}</div>
           <div class="song_info">
-          <div class="songname">Stay Calm</div>
+          <div class="songname">{{item.sname}}<div class="small">{{item.singer}}-{{item.albumname}}</div></div>
           <div class="more"><i class="icon iconfont icon-gengduo"></i></div>
           </div>
         </li>
-        <li>
+        <!-- <li>
           <div class="rank">2</div>
           <div class="song_info">
           <div class="songname">Stay Calm</div>
           <div class="play"><i class="icon iconfont icon-shipin"></i></div>
           <div class="more"><i class="icon iconfont icon-gengduo"></i></div>
           </div>
-        </li>
-        <li>
-          <div class="rank">3</div>
-          <div class="song_info">
-          <div class="songname">Stay Calm</div>
-          <div class="play"><i class="icon iconfont icon-shipin"></i></div>
-          <div class="more"><i class="icon iconfont icon-gengduo"></i></div>
-          </div>
-        </li>
-                <li>
-          <div class="rank">4</div>
-          <div class="song_info">
-          <div class="songname">Stay Calm</div>
-          <div class="play"><i class="icon iconfont icon-shipin"></i></div>
-          <div class="more"><i class="icon iconfont icon-gengduo"></i></div>
-          </div>
-        </li>
-        <li>
-          <div class="rank">5</div>
-          <div class="song_info">
-          <div class="songname">Stay Calm</div>
-          <div class="more"><i class="icon iconfont icon-gengduo"></i></div>
-          </div>
-        </li>
-        <li>
-          <div class="rank">6</div>
-          <div class="song_info">
-          <div class="songname">Stay Calm</div>
-          <div class="more"><i class="icon iconfont icon-gengduo"></i></div>
-          </div>
-        </li>
-        <li>
-          <div class="rank">7</div>
-          <div class="song_info">
-          <div class="songname">Stay Calm</div>
-          <div class="more"><i class="icon iconfont icon-gengduo"></i></div>
-          </div>
-        </li>
-        <li>
-          <div class="rank">8</div>
-          <div class="song_info">
-          <div class="songname">Stay Calm</div>
-          <div class="more"><i class="icon iconfont icon-gengduo"></i></div>
-          </div>
-        </li>
-        <li>
-          <div class="rank">9</div>
-          <div class="song_info">
-          <div class="songname">Stay Calm</div>
-          <div class="more"><i class="icon iconfont icon-gengduo"></i></div>
-          </div>
-        </li>
+        </li> -->
+
       </ul>
     </div>
   </div>
@@ -102,11 +52,13 @@
     import Vue from 'vue'
     import VueResource from 'vue-resource'
     var id = window.location.href.split('=')[1];
+    console.log(window.location.href);
     console.log(id);
     export default {
       name: 'songlist',
       data () {
           return {
+            songlist:{}
           }
       },
       mounted(){
@@ -114,12 +66,14 @@
       },
       methods:{
         getListById(id){
-          console.log(entities.api+'/songlist/1');
-            this.$http.get(entities.api+'/songlist/',{'id':id}).then(res =>{
-              console.log(res);
+          console.log(entities.api+'/common/page/songlist/'+id);
+            this.$http.get(entities.api+'/common/page/songlist/'+id,{}).then(res =>{
+              console.log(res.data);
             let data = res.data.data;
             if(res.ok){
-            this.newestMusic=data;
+              console.log(data[0]);
+              data[0].listPicture = 'static/'+ data[0].listPicture;
+            this.songlist=data[0];
              }
         }).catch((error)=>{
             console.log(error);
@@ -128,7 +82,10 @@
       }
    }
 </script>
-<style>
+<style lang="css" ref="stylesheet/css" scoped>
+.info_right{
+  width:60%;
+}
 .songlist_content{
   padding:0 0 55px;
 }
@@ -140,6 +97,7 @@
 }
 
 .songname{
+  line-height: 25px;
   width: 80%;
 }
 
@@ -218,7 +176,7 @@
   justify-content: space-around;
 }
 
-.list_cover{
+.list_cover1{
   height: 100px;
   width: 100px;
   background: url('/static/uploads/20171102/966efd8fb569b19ceed2320c93a829a2.jpg') no-repeat;
@@ -341,6 +299,14 @@
 .back img{
   width: 22px;
   height: auto;
+}
+
+.small{
+  font-size: 12px;
+  transform: scale(0.8);
+  margin-left: -28px;
+  color:gray;
+  line-height: 20px;
 }
 
 </style>
