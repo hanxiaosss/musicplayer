@@ -8,6 +8,7 @@ import mine from '@/components/mine/mine'
 import friends from '@/components/friends/friends'
 import svideo from '@/components/video/video'
 import account from '@/components/account/account'
+import songplay from '@/components/discover/songsplay'
 
 Vue.use(Router)
 Vue.use(VueResource)
@@ -21,12 +22,17 @@ export default new Router({
         {
             path: '/discover',
             name: 'discover',
-            component: discover
+            component: discover,
         },
         {
             path: '/discover/songlist',
             name: 'songlist',
             component: songlist
+        },
+        {
+            path: '/discover/songplay',
+            name: 'songplay',
+            component: songplay
         },
         {
             path: '/mine',

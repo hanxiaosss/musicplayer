@@ -21,7 +21,7 @@
       <div class="play_info">
         <i class="icon iconfont icon-16"></i>
         <div class="play_data">
-          <div class="play_all">播放全部<span class="all_number">(共{{songlist.songs.length}}首)</span></div>
+          <div class="play_all">播放全部<span class="all_number">(共{{songlist.songnum}}首)</span></div>
           <div class="collect">+收藏({{songlist.collectionTimes}})</div>
         </div>
       </div>
@@ -29,7 +29,9 @@
         <li v-for="(item,index) of songlist.songs">
           <div class="rank">{{index+1}}</div>
           <div class="song_info">
-          <div class="songname">{{item.sname}}<div class="small">{{item.singer}}-{{item.albumname}}</div></div>
+          <router-link :to="{path:'/discover/songplay/',query:{id:item.sid,tag:1}}">
+          <div class="songname">{{item.sname}}<div class="small">{{item.singer}} —— {{item.albumname}}</div></div>
+          </router-link>
           <div class="more"><i class="icon iconfont icon-gengduo"></i></div>
           </div>
         </li>
@@ -51,9 +53,6 @@
     import { Swipe, SwipeItem } from 'mint-ui'
     import Vue from 'vue'
     import VueResource from 'vue-resource'
-    var id = window.location.href.split('=')[1];
-    console.log(window.location.href);
-    console.log(id);
     export default {
       name: 'songlist',
       data () {
@@ -62,10 +61,12 @@
           }
       },
       mounted(){
+        var id = this.$route.query.id;
         this.getListById(id);
       },
       methods:{
         getListById(id){
+          console.log(this.$route.query.id);
           console.log(entities.api+'/common/page/songlist/'+id);
             this.$http.get(entities.api+'/common/page/songlist/'+id,{}).then(res =>{
               console.log(res.data);
@@ -73,6 +74,7 @@
             if(res.ok){
               console.log(data[0]);
               data[0].listPicture = 'static/'+ data[0].listPicture;
+              data[0].songnum = data[0].songs.length
             this.songlist=data[0];
              }
         }).catch((error)=>{
@@ -83,6 +85,10 @@
    }
 </script>
 <style lang="css" ref="stylesheet/css" scoped>
+.song_info a{
+  display: block;
+  width: 100%;
+}
 .info_right{
   width:60%;
 }
