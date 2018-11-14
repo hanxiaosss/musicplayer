@@ -9,6 +9,7 @@ import friends from '@/components/friends/friends'
 import svideo from '@/components/video/video'
 import account from '@/components/account/account'
 import songplay from '@/components/discover/songsplay'
+import demo from '@/components/common/demo'
 
 Vue.use(Router)
 Vue.use(VueResource)

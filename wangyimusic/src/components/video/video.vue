@@ -1,5 +1,5 @@
 <template>
-<searchbox></searchbox>
+<searchbox v-bind:index ="1"></searchbox>
 </template>
 <script>
 import SearchBox from '@/components/common/search_box'

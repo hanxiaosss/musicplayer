@@ -1,3 +1,3 @@
-const api = 'http://192.168.1.154:8888'
+const api = 'http://192.168.0.197:8888'
 
 export default { api }

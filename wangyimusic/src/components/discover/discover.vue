@@ -1,7 +1,7 @@
 
 <template>
   <div class="discover">
-      <searchbox></searchbox>
+      <searchbox v-bind:index="0"></searchbox>
       <tabtop></tabtop>
       <div class="swipe_wrap">
       <mt-swipe :auto="4000">
@@ -32,12 +32,12 @@
         <div class="radio">
           <div class="title">主播电台<i class="icon iconfont icon-jiantou"></i></div>
           <ul class="cover_list">
-            <li><img src="../../assets/resource/cover.jpg"><div class="discription">华语速报新歌</div></li>
+            <!-- <li><img src="../../assets/resource/cover.jpg"><div class="discription">华语速报新歌</div></li>
             <li><img src="../../assets/resource/cover.jpg"><div class="discription">翻唱||给喧嚣的欧美热单添上一抹亮色</div></li>
             <li><img src="../../assets/resource/cover.jpg"><div class="discription">华语速报新歌</div></li>
             <li><img src="../../assets/resource/cover.jpg"><div class="discription">华语速报新歌</div></li>
             <li><img src="../../assets/resource/cover.jpg"><div class="discription">华语速报新歌哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈</div></li>
-            <li><img src="../../assets/resource/cover.jpg"><div class="discription">华语速报新歌</div></li>
+            <li><img src="../../assets/resource/cover.jpg"><div class="discription">华语速报新歌</div></li> -->
           </ul>
         </div>
       </div>
@@ -93,7 +93,6 @@
            console.log(res);
            let data = res.data.data;
            if(res.ok){
-            //  data.listPicture='../../assets'+ data.listPicture;
              console.log(data);
              for(let i = 0;i<data.length;i++){
                data[i].listPicture='static/'+ data[i].listPicture;
