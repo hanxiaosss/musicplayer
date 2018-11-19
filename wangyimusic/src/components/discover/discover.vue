@@ -20,7 +20,7 @@
         <div class="recommad">
           <div class="title">推荐歌单<i class="icon iconfont icon-jiantou"></i></div>
           <ul class="cover_list">
-            <li v-for="list in musicLists"><router-link :to="{path:'/discover/songlist/',query:{id:list.id}}"><img :src="list.listPicture" class="list_cover"><div class="discription">{{list.listname}}</div></router-link></li>
+            <li v-for="list in musicLists"><router-link :to="{path:'/discover/songlist/',query:{id:list.id}}"  @click.native="flush"><img :src="list.listPicture" class="list_cover"><div class="discription">{{list.listname}}</div></router-link></li>
           </ul>
         </div>
         <div class="newlist">
@@ -78,7 +78,6 @@
       methods:{
             getNewestmusicList(){
             this.$http.get(entities.api+'/common/newestSong/list',{}).then(res =>{
-              console.log(res);
             let data = res.data.data;
             if(res.ok){
             this.newestMusic=data;
@@ -90,10 +89,8 @@
 
        getRecommandList(){
          this.$http.get(entities.api+'/common/recommand/list',{}).then(res =>{
-           console.log(res);
            let data = res.data.data;
            if(res.ok){
-             console.log(data);
              for(let i = 0;i<data.length;i++){
                data[i].listPicture='static/'+ data[i].listPicture;
              }
@@ -105,8 +102,17 @@
        },
        goSongList(id){
          console.log(id);
-       }
+       },
+       flush:function(){
+
+　　　　　//router是路由实例,例如:var router = new Router({})
+
+　　　　　//router.go(n)是路由的一个方法，意思是在history记录中前进或者后退多少步，0就表示还是当前，类似window.history.go(n)
+　　　　　　this.$router.go(0);  
+
+　　　　}
       }
+      
 }
 </script>
 <style lang="css" ref="stylesheet/css" scoped>

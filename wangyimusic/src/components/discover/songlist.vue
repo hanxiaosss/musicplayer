@@ -1,5 +1,7 @@
 <template>
-  <div class="songlist_content">
+   <div>
+  <div class="songlist_content songlist_content_blur" :style="{backgroundImage:'url('+songlist.listPicture+')'}"></div>
+    <div class="songlist_layer">
     <div class="header">
       <div class="back"><img src="../../assets/resource/back.png" alt=""></div>
       <div class="title1">歌单</div>
@@ -46,7 +48,8 @@
 
       </ul>
     </div>
-  </div>
+    </div>
+    </div>
 </template>
 <script>
     import entities from '../../untils/entities'
@@ -63,6 +66,7 @@
       mounted(){
         var id = this.$route.query.id;
         this.getListById(id);
+
       },
       methods:{
         getListById(id){
@@ -94,7 +98,27 @@
 }
 .songlist_content{
   padding:0 0 55px;
+  height: 100%;
 }
+
+.songlist_content_blur {
+  z-index: -100000;
+  position: absolute;
+  left: 0;
+  top:0;
+  width: 100%;
+  height: 100%;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  -webkit-filter: blur(15px);
+  -moz-filter: blur(15px);
+  -o-filter: blur(15px);
+  -ms-filter: blur(15px);
+  filter: blur(15px);
+}
+
+
 .song_info{
   display: flex;
   justify-content: space-between;
@@ -111,7 +135,7 @@
   content: "";
 	width: 300%;
 	height: 1px;
-	background: grey;
+	/* background: grey; */
 	position: absolute;
 	left: -100%;
 	bottom: 0;
@@ -126,14 +150,17 @@
   justify-content: space-between;
 }
 
+.songs li:hover{
+  background: #aaa;
+  opacity: .7;
+}
+
 .play,.rank,.more{
   width: 10%;
   text-align: center;
   color:gray;
 }
-.songlist_content{
-  background: #7BA7B4;
-}
+
 .header{
   z-index: 10000;
   position: fixed;
@@ -144,7 +171,8 @@
   justify-content: space-between;
   color:#fff;
   padding: 10px;
-  background: #7BA7B4;
+  background: #000;
+  opacity: .5;
   /* line-height: 22px; */
 }
 
@@ -153,7 +181,7 @@
 }
 
 .info_cover{
-  background:#7BA7B4; 
+  /* background:#7BA7B4;  */
   padding-top:45px;
 }
 .input_box1{
@@ -185,7 +213,6 @@
 .list_cover1{
   height: 100px;
   width: 100px;
-  background: url('/static/uploads/20171102/966efd8fb569b19ceed2320c93a829a2.jpg') no-repeat;
   background-size: cover;
   border-radius: 3px;
   position: relative;
