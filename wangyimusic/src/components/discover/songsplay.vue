@@ -1,13 +1,19 @@
 <template>
   <div>
     <div class="background_content background_content_blur" :style="{backgroundImage:'url('+song.songpicture+')'}"></div>
-    <div class="header"></div>
+    <div class="header">
+      <div class="left"></div>
+      <div class="center"></div>
+      <div class="right"></div>
+    </div>
     <div class="lyric">
-      <ul>
-        <li>{{song.lrc}}</li>
+      <ul class="lyrics_list">
+        <li v-for="lrc in lyrics">{{lrc}}</li>
       </ul>
     </div>
-    <div class="play_music"></div>
+    <div class="play_music">
+      <audio v-bind:src="song.url" controls="controls" loop="loop" autoplay="autoplay">亲 您的浏览器不支持html5的audio标签</audio>
+    </div>
   </div>
 </template>
 <script>
@@ -34,7 +40,7 @@ export default {
             let data = res.data.data[0];
             if(res.data.success){
               this.song=data;
-              this.lyrics = data.lrc.replace(/[^\u4e00-\u9fa5]/gi,",");
+              this.lyrics = data.lrc.replace(/\[(.+?)\]/g,",").split(',');
               console.log(this.lyrics);
             }
           });
@@ -43,8 +49,10 @@ export default {
 }  
 </script>
 <style>
+body,html,#app,#app>div:first-child{
+  height: 100%;
+}
 .background_content{
-  padding:0 0 55px;
   height: 100%;
 }
 
@@ -63,6 +71,18 @@ export default {
   -o-filter: blur(15px);
   -ms-filter: blur(15px);
   filter: blur(15px);
+}
+.lyric{
+    height: 100%;
+    overflow-y: scroll;
+}
+.lyrics_list{
+  text-align: center;
+  color:#aaa;
+}
+
+.lyrics_list li{
+  line-height: 20px;
 }
 </style>
 

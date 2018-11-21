@@ -31,7 +31,7 @@
         <li v-for="(item,index) of songlist.songs">
           <div class="rank">{{index+1}}</div>
           <div class="song_info">
-          <router-link :to="{path:'/discover/songplay/',query:{id:item.sid,tag:1}}">
+          <router-link :to="{path:'/discover/songplay/',query:{id:item.sid,tag:1}}" @click.native="flush">
           <div class="songname">{{item.sname}}<div class="small">{{item.singer}} —— {{item.albumname}}</div></div>
           </router-link>
           <div class="more"><i class="icon iconfont icon-gengduo"></i></div>
@@ -84,7 +84,15 @@
         }).catch((error)=>{
             console.log(error);
         })
-      }
+      },
+        flush:function(){
+
+　　　　　//router是路由实例,例如:var router = new Router({})
+
+　　　　　//router.go(n)是路由的一个方法，意思是在history记录中前进或者后退多少步，0就表示还是当前，类似window.history.go(n)
+　　　　　　this.$router.go(0);  
+
+　　　　}
       }
    }
 </script>
