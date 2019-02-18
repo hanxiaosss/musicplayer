@@ -54,6 +54,7 @@ body,html,#app,#app>div:first-child{
 }
 .background_content{
   height: 100%;
+  width:100%;
 }
 
 .background_content_blur {
@@ -75,6 +76,7 @@ body,html,#app,#app>div:first-child{
 .lyric{
     height: 100%;
     overflow-y: scroll;
+    margin-top: 50px;
 }
 .lyrics_list{
   text-align: center;
@@ -83,6 +85,18 @@ body,html,#app,#app>div:first-child{
 
 .lyrics_list li{
   line-height: 20px;
+}
+
+audio{
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 99%;
+    margin: 10px 0;
+}
+
+audio{
+  opacity: .5;
 }
 </style>
 
